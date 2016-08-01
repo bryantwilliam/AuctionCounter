@@ -1,25 +1,24 @@
 package com.gmail.gogobebe2.auctioncounter;
 
+
 import javax.swing.*;
-import java.awt.*;
 
 public class Launcher {
     public static void main(String[] args) {
-        //1. Create the frame.
-        JFrame frame = new JFrame("FrameDemo");
+        CounterFrame frame = new CounterFrame();
+    }
 
-        //2. Optional: What happens when the frame closes?
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    private static class CounterFrame extends JFrame {
+        private CounterFrame() {
+            setTitle("Auction Counter");
 
-        //3. Create components and put them in the frame.
-        //...create emptyLabel...
-        JLabel label = new JLabel("BLABAL");
-        frame.getContentPane().add(label, BorderLayout.CENTER);
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //4. Size the frame.
-        frame.pack();
+            JLabel priceLabel = new JLabel("$0.00");
+            add(priceLabel);
+            pack();
 
-        //5. Show it.
-        frame.setVisible(true);
+            setVisible(true);
+        }
     }
 }
