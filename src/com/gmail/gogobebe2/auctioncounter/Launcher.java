@@ -30,15 +30,15 @@ public class Launcher {
         private AuctionCounterFrame() {
             setTitle("Auction Counter"); // Probably pointless.
 
-            setUpJFrameAesthetics();
-
             addJLabel("0");
+
+            setUpJFrameAesthetics();
 
             addKeyListener(new AuctionCounterKeyListener());
         }
 
         private void setUpJFrameAesthetics() {
-            //setLocation(Toolkit.getDefaultToolkit().getScreenSize().width, 0); // Top right corner.
+            setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - getSize().width/2, 0); // Top center
             setAlwaysOnTop(true);
             setUndecorated(true); // Removes buttons/borders.
             //setBackground(new Color(0, 0, 0, 0)); // Transparent.
