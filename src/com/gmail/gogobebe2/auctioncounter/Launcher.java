@@ -30,17 +30,16 @@ public class Launcher {
         private AuctionCounterFrame() {
             setTitle("Auction Counter"); // Probably pointless.
 
-            addJLabel("0");
-
             setUpJFrameAesthetics();
+
+            addJLabel("0");
 
             addKeyListener(new AuctionCounterKeyListener());
         }
 
         private void setUpJFrameAesthetics() {
-            setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - getSize().width/2, 0); // Top center
-            setAlwaysOnTop(true);
             setUndecorated(true); // Removes buttons/borders.
+            setAlwaysOnTop(true);
             //setBackground(new Color(0, 0, 0, 0)); // Transparent.
         }
 
@@ -52,6 +51,8 @@ public class Launcher {
             add(priceLabel);
             // Makes the JFrame resize to fit it's content - This needs to be infront of the add(priceLabel) call.
             pack();
+
+            setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - getSize().width / 2, 0); // Top center
         }
 
         private void setPrice(String price) {
@@ -61,8 +62,9 @@ public class Launcher {
             System.out.println(price);
 
             DecimalFormat formatter = new DecimalFormat("#,###");
-
-            addJLabel("$" + formatter.format(Double.parseDouble(price)));
+            try {
+                addJLabel("$" + formatter.format(Double.parseDouble(price)));
+            } catch (NullPointerException ignored) {}
         }
     }
 
@@ -86,8 +88,7 @@ public class Launcher {
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                 frame.setPrice(priceStringBuilder.toString());
                 priceStringBuilder = new StringBuilder();
-            }
-            else priceStringBuilder.append(e.getKeyChar());
+            } else priceStringBuilder.append(e.getKeyChar());
 
             System.out.println("Debug: key released: " + e.getKeyChar());
         }
