@@ -87,8 +87,7 @@ public class Launcher {
                 case KeyEvent.VK_ENTER:
                     try {
                         frame.setPrice(Double.parseDouble(priceStringBuilder.toString()));
-                    } catch (NumberFormatException ignored) {
-                    }
+                    } catch (NumberFormatException ignored) {}
                     priceStringBuilder = new StringBuilder();
                     break;
                 case KeyEvent.VK_BACK_SPACE:
