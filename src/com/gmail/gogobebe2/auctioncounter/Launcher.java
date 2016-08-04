@@ -55,23 +55,22 @@ public class Launcher {
             setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - getSize().width / 2, 0); // Top center
         }
 
-        private void setPrice(String price) {
+        private void setPrice(double price) {
             frame.remove(priceLabel);
             frame.revalidate();
             frame.repaint();
             System.out.println(price);
 
             DecimalFormat formatter = new DecimalFormat("#,###");
-            try {
-                addJLabel("$" + formatter.format(Double.parseDouble(price)));
-            } catch (NullPointerException ignored) {}
+
+            addJLabel("$" + formatter.format(price));
         }
     }
+
 
     private static class AuctionCounterKeyListener implements KeyListener {
         private StringBuilder priceStringBuilder = new StringBuilder();
 
-        // TODO: add Shortcut: "q key" to escape.
         @Override
         public void keyTyped(KeyEvent e) {
             System.out.println("Debug: key typed: " + e.getKeyChar());
@@ -84,12 +83,19 @@ public class Launcher {
 
         @Override
         public void keyReleased(KeyEvent e) {
-
-            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                frame.setPrice(priceStringBuilder.toString());
-                priceStringBuilder = new StringBuilder();
-            } else priceStringBuilder.append(e.getKeyChar());
-
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_ENTER:
+                    try {
+                        frame.setPrice(Double.parseDouble(priceStringBuilder.toString()));
+                    } catch (NumberFormatException ignored) {
+                    }
+                    priceStringBuilder = new StringBuilder();
+                    break;
+                case KeyEvent.VK_BACK_SPACE:
+                    if (priceStringBuilder.length() > 0) priceStringBuilder.deleteCharAt(priceStringBuilder.length() - 1);
+                    break;
+                default: priceStringBuilder.append(e.getKeyChar());
+            }
             System.out.println("Debug: key released: " + e.getKeyChar());
         }
     }
