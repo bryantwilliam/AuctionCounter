@@ -6,7 +6,7 @@
  * <p>
  * Coded by William Bryant.
  * Started development on Tuesday, 2nd of August.
- * Finished development on TBD.
+ * Finished development on 5th of August.
  **/
 
 package com.gmail.gogobebe2.auctioncounter;
